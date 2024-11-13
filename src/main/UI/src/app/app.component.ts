@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HttpClient, HttpResponse,HttpHeaders} from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {map} from "rxjs/operators";
 
 
@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   private getUrl:string = this.baseURL + '/room/reservation/v1/';
   private postUrl:string = this.baseURL + '/room/reservation/v1';
   public submitted!:boolean;
+  welcomes: string = "";
   roomsearch! : FormGroup;
   rooms! : Room[];
   request!:ReserveRoomRequest;
@@ -36,6 +37,9 @@ export class AppComponent implements OnInit{
 
  //     this.rooms=ROOMS;
 
+    this.getWelcomes().subscribe(data => {
+      this.welcomes = data[0] + " " + data[1];
+    }) 
 
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
 
@@ -44,6 +48,10 @@ export class AppComponent implements OnInit{
       this.currentCheckInVal = x.checkin;
       this.currentCheckOutVal = x.checkout;
     });
+  }
+
+  getWelcomes(): Observable<any>{
+    return this.httpClient.get<any>(this.baseURL + "/api/welcome");
   }
 
     onSubmit({value,valid}:{value:Roomsearch,valid:boolean}){

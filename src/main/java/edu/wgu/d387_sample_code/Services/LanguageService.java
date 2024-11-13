@@ -67,7 +67,7 @@ public class LanguageService {
         // Below is so that if this method gets ran again, it is started with the arraylist empty
         messages.clear();
         // This code is pretty straight forward (It starts the threads)
-        englishThread.start();
+        englishThread.start(); // This thread will more often finsish first as it is called/started first, but it won't ALLWAYS finish first
         frenchThread.start();
 
         // Wait for both threads to finish
