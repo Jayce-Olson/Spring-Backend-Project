@@ -14,7 +14,10 @@
       <div class="navbar">
         <div class="brand"><a href="/#welcome">Landon<span>Hotel</span></a>
         </div>
-        <h1>{{welcomes}}</h1>
+        <h1 class="brand">{{welcomes}}</h1>
+        <h1>There will be an online accessible presentation held at the Landan Hotel starting at the following times:
+          <h1 *ngFor="let time of times">{{time}}<br /></h1>
+        </h1>
       </div><!-- navbar -->
     </nav>
   </div>

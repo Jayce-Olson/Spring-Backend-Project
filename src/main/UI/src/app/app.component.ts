@@ -23,6 +23,7 @@ export class AppComponent implements OnInit{
   private postUrl:string = this.baseURL + '/room/reservation/v1';
   public submitted!:boolean;
   welcomes: string = "";
+  times: string[] = [];
   roomsearch! : FormGroup;
   rooms! : Room[];
   request!:ReserveRoomRequest;
@@ -48,7 +49,15 @@ export class AppComponent implements OnInit{
     this.getWelcomes().subscribe(data => {
       this.welcomes = data[0] + " " + data[1];
     }) 
+    this.getTimes().subscribe(data => {
+      console.log(data);
+      this.times = data;
+    }) 
   
+  }
+
+  getTimes(): Observable<any>{
+    return this.httpClient.get<any>(this.baseURL + "/api/times");
   }
 
   getWelcomes(): Observable<any>{
