@@ -37,10 +37,6 @@ export class AppComponent implements OnInit{
 
  //     this.rooms=ROOMS;
 
-    this.getWelcomes().subscribe(data => {
-      this.welcomes = data[0] + " " + data[1];
-    }) 
-
     const roomsearchValueChanges$ = this.roomsearch.valueChanges;
 
     // subscribe to the stream
@@ -48,6 +44,11 @@ export class AppComponent implements OnInit{
       this.currentCheckInVal = x.checkin;
       this.currentCheckOutVal = x.checkout;
     });
+
+    this.getWelcomes().subscribe(data => {
+      this.welcomes = data[0] + " " + data[1];
+    }) 
+  
   }
 
   getWelcomes(): Observable<any>{
