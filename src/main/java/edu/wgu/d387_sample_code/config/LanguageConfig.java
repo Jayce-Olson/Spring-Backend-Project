@@ -8,16 +8,18 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
 public class LanguageConfig {
-    // Still in the process of learning spring so i'm just writing this to make sure
-    // I don't forget: A spring @Bean annotation tells spring that a method
-    // instantiates, configures, and initializes a new object to be managed by the
-    // Spring IoC container. Now its time for the rabbit hole muhahhah. A Spring IoC
-    // container is basically "a program that injects dependencies into objects to
-    // achieve loose coupling and dynamic binding" which is nerd for a program that
-    // automatically takes care of creating and manageing objects in your code (the
-    // annotations help spring know what is what for this management). In summary
-    // a @Bean annotation tells the spring IoC(basically the automatic manager for spring)
-    // What the class is.
+    /*
+     Still in the process of learning spring so i'm just writing this to make sure
+     I don't forget: A spring @Bean annotation tells spring that a method
+     instantiates, configures, and initializes a new object to be managed by the
+     Spring IoC container. Now its time for the rabbit hole muhahhah. A Spring IoC
+     container is basically "a program that injects dependencies into objects to
+     achieve loose coupling and dynamic binding" which is nerd for a program that
+     automatically takes care of creating and manageing objects in your code (the
+     annotations help spring know what is what for this management). In summary
+     a @Bean annotation tells the spring IoC(basically the automatic manager for spring)
+     What the class is.
+     */
     @Bean
     // Technically I can make the return type ResourceBundleMessageSource but I have a long comment later explaining why I shouldn't
     public MessageSource languageBundle(){ // Message source is an imported spring framework interface
@@ -56,18 +58,23 @@ public class LanguageConfig {
         the initilized object in this class without (ideally) having to change code anywhere
         else. Basically both the old and new objects will have the same methods they inherited
         from MessageSource, allowing them to be swapped out easier than if the return type was
-        the object itself. From what it seems though, in this situation it is the difference between
-        one day haveing to change the return type and initilized object, and just changing the
-        initilized object. From what I have looked into though, this seems to be best practice so
-        I will leave it alone. This way de-couples and makes the code more modular/easier to update
+        the object itself. For example, later in the code this object will be created as
+        MessageSource objectName; Returning the object this way allows the actual object to be
+        easily updated as long as it extends MessageSource, so rather than change the type everywhere
+        it is initilized in the code, only the initilization in the method needs to be change. This is
+        making me really start to like Java. This is somehow a major software design principle I did not
+        fully understand about interfaces and Java until now.
          */
         return languageBundleSource;
     }
 }
-/* I just realized I forgot to explain what the program overall does. This basially just creates
+/*
+
+   I just realized I forgot to explain what the program overall does. This basially just creates
    the object responsible for access to the language bundles. I find it wild that this much
    commantary/info goes into just being able to understand the "why's" of writing a program like
    this to basically just create an object with the sole purpose of accessing other files.
    (i'm not saying it's a bad thing, it's actually really cool to know how much goes into writing
    good, maintainable code, just also wild while learning it). Anyhoodles, onto the next.
- */
+
+*/
